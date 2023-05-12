@@ -21,7 +21,25 @@ def build_polynomial(matrix):
         return result
     return evaluate
 
+def build_polynomial_text(matrix): #Misma funcion pero 
+    def get_equation():
+        equation = ""
+        for i in range(len(matrix)):
+            term = ""
+            for j in range(len(matrix)):
+                if j != i:
+                    if matrix[i][0] - matrix[j][0] != 0:
+                        term += f"(x - {matrix[j][0]}) / ({matrix[i][0]} - {matrix[j][0]})" # Construye una cadena de texto del polinomio
+            term = f"{matrix[i][1]} * ({term})" if term else str(matrix[i][1])
+            equation += term if not equation else f" + {term}" # Una ecuacion general
+        return equation
+    return get_equation
+
+
 lagrange = build_polynomial(matrix);
+lagrange_eq = build_polynomial_text(matrix);
+
+print(f'POLINOMIO DE LAGRANGE {lagrange_eq()}'); 
 
 calculate = True
 while calculate is True:
